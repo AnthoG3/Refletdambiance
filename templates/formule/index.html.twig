@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Nos Formules</h1>
+    {% for formule in formules %}
+        <div>
+            <h2>{{ formule.title }}</h2>
+            <p>{{ formule.content }}</p>
+            {% if formule.image %}
+                <img src="{{ asset('uploads/formules/' ~ formule.image) }}" alt="{{ formule.title }}">
+            {% endif %}
+            <a href="{{ path('app_formule_show', { id: formule.id }) }}">Voir les détails</a>
+        </div>
+    {% endfor %}
+{% endblock %}

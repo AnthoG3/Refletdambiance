@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Nos Inspirations</h1>
+    {% for inspiration in inspirations %}
+        <div>
+            <h2>{{ inspiration.titre }}</h2>
+            <p>{{ inspiration.texte }}</p>
+            {% if inspiration.image %}
+                <img src="{{ asset('uploads/inspiration/' ~ inspiration.image) }}" alt="{{ formule.titre }}">
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}
