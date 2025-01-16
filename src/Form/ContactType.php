@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Contact;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -14,7 +13,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
-
 
 class ContactType extends AbstractType
 {
@@ -43,7 +41,6 @@ class ContactType extends AbstractType
                     ]),
                 ],
             ])
-
             ->add('pieces', ChoiceType::class, [
                 'label' => 'Nb de pièces',
                 'attr' => ['class' => 'form-control'],
@@ -84,10 +81,10 @@ class ContactType extends AbstractType
                 ],
             ])
             ->add('styles', ChoiceType::class, [
-                'label' => 'Styles',
+                'label' => 'Ambiance',
                 'attr' => ['class' => 'form-control'],
                 'label_attr' => ['class' => 'form-label'],
-                'choices'  => [
+                'choices' => [
                     'Cocooning' => 'cocooning',
                     'Pastel' => 'pastel',
                     'Chalet' => 'chalet',
@@ -106,6 +103,9 @@ class ContactType extends AbstractType
                     'Kids jungle' => 'kids_jungle',
                     'Kids savane' => 'kids_savane',
                 ],
+                'expanded' => false,
+                'multiple' => false,  // Permet une seule sélection
+                'required' => false,
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'Description du projet',

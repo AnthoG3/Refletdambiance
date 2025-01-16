@@ -1,14 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Nos Inspirations</h1>
-    {% for inspiration in inspirations %}
-        <div>
-            <h2>{{ inspiration.titre }}</h2>
-            <p>{{ inspiration.texte }}</p>
-            {% if inspiration.image %}
-                <img src="{{ asset('uploads/inspiration/' ~ inspiration.image) }}" alt="{{ formule.titre }}">
-            {% endif %}
+    <div class="container mt-4">
+        <h1 class="mb-4">Nos Inspirations</h1>
+        <div class="row">
+            {% for inspiration in inspirations %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if inspiration.image %}
+                            <img src="{{ asset('uploads/inspirations/' ~ inspiration.image) }}" class="card-img-top" alt="{{ inspiration.title }}" style="height: 200px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ inspiration.title }}</h5>
+                            <a href="{{ path('app_inspiration_show', {'id': inspiration.id}) }}" class="btn btn-primary voir-plus mt-auto">Voir plus</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div>
 {% endblock %}

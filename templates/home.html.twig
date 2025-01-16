@@ -14,11 +14,11 @@
             <div class="text-container">
                 <h2 class="card-title">Présentation</h2>
                 <p>
-                    Je suis Océane VITRAC-MULLER,<br>
-                    décoratrice d'intérieur spécialisée dans la création d'intérieur en 3D.<br>
-                    Vous achetez sur plan ?
-                    Vous faites construire ou vous avez tout simplement envie de changer la décoration de votre intérieur ?<br>
-                    De la planche d'ambiance à l'agencement, en passant par la shopping list, je suis là pour vous aider à vous projeter, à mettre en valeur votre bien.
+                    Je m'appelle Océane VITRAC-MULLER,<br>
+                    Je suis mariée et maman de deux petites filles.<br>
+                    Vous faites construire, vous rénovez ou vous avez simplement envie de changer votre déco ?<br>
+                    De la planche ambiance à la représentation 3D en passant par la planche mobilier,<br>
+                    je suis là pour vous aider à vous projeter et mettre votre bien en valeur.<br>
                 </p>
             </div>
         </div>
@@ -27,6 +27,7 @@
     <div class="card contact-card">
         <div class="card-body">
             <div class="container">
+
                 {% for label, messages in app.flashes %}
                     {% for message in messages %}
                         <div class="alert alert-{{ label == 'error' ? 'danger' : label }} alert-dismissible fade show" role="alert">
@@ -35,60 +36,73 @@
                         </div>
                     {% endfor %}
                 {% endfor %}
+
                 <div class="row">
                     <h1 class="text-center" id="contact">Formulaire de contact</h1>
                     <div class="col">
-                        {{ form_start(form) }}
+                        {% if contactForm is defined %}
+                            {{ form_start(contactForm) }}
 
-                        <div class="form-group">
-                            {{ form_label(form.name, 'Prénom et nom :') }}
-                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                            <div class="form-group">
+                                {{ form_label(contactForm.name, 'Prénom et nom :') }}
+                                {{ form_widget(contactForm.name, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(contactForm.name) }}
+                            </div>
 
-                        <div class="form-group">
-                            {{ form_label(form.email, 'Email :') }}
-                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                            <div class="form-group">
+                                {{ form_label(contactForm.email, 'Email :') }}
+                                {{ form_widget(contactForm.email, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(contactForm.email) }}
+                            </div>
 
-                        <div class="form-group">
-                            {{ form_label(form.phone, 'Téléphone :') }}
-                            {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_label(form.pieces, 'Nombre de pièces :') }}
-                            {{ form_widget(form.pieces, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                            <div class="form-group">
+                                {{ form_label(contactForm.phone, 'Téléphone :') }}
+                                {{ form_widget(contactForm.phone, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(contactForm.phone) }}
+                            </div>
 
-                        <div class="form-group">
-                            {{ form_label(form.m2, 'Nombre de m² :') }}
-                            {{ form_widget(form.m2, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                            <div class="form-group">
+                                {{ form_label(contactForm.pieces, 'Nombre de pièces :') }}
+                                {{ form_widget(contactForm.pieces, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(contactForm.pieces) }}
+                            </div>
 
-                        <div class="form-group">
-                            {{ form_label(form.habitation, 'Type d\'habitation :') }}
-                            {{ form_widget(form.habitation, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                            <div class="form-group">
+                                {{ form_label(contactForm.m2, 'Nombre de m² :') }}
+                                {{ form_widget(contactForm.m2, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(contactForm.m2) }}
+                            </div>
 
-                        <div class="form-group">
-                            {{ form_label(form.foyer, 'Vous êtes : ') }}
-                            {{ form_widget(form.foyer, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                            <div class="form-group">
+                                {{ form_label(contactForm.habitation, 'Type d\'habitation :') }}
+                                {{ form_widget(contactForm.habitation, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(contactForm.habitation) }}
+                            </div>
 
-                        <div class="form-group">
-                            {{ form_label(form.styles, 'Quelle(s) ambiance(s) souhaitez-vous :') }}
-                            {{ form_widget(form.styles, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                            <div class="form-group">
+                                {{ form_label(contactForm.foyer, 'Vous êtes : ') }}
+                                {{ form_widget(contactForm.foyer, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(contactForm.foyer) }}
+                            </div>
 
-                        <div class="form-group">
-                            {{ form_label(form.message, 'Description de votre projet :') }}
-                            {{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': 4}}) }}
-                        </div>
+                            <div class="form-group">
+                                {{ form_label(contactForm.styles, 'Quelle ambiance souhaitez-vous :') }}
+                                {{ form_widget(contactForm.styles, {'attr': {'class': 'form-select'}}) }}
+                                {{ form_errors(contactForm.styles) }}
+                            </div>
 
-                        {{ form_errors(form) }}
+                            <div class="form-group">
+                                {{ form_label(contactForm.message, 'Description de votre projet :') }}
+                                {{ form_widget(contactForm.message, {'attr': {'class': 'form-control', 'rows': 4}}) }}
+                                {{ form_errors(contactForm.message) }}
+                            </div>
 
-                        <button type="submit" class="btn btn-primary d-block mx-auto mt-3">Envoyer</button>
+                            <button type="submit" class="btn btn-primary d-block mx-auto mt-3">Envoyer</button>
 
-                        {{ form_end(form) }}
+                            {{ form_end(contactForm) }}
+                        {% else %}
+                            <p>Le formulaire n'a pas été trouvé.</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -6,45 +6,74 @@ use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: ContactRepository::class)]
+/**
+ * @ORM\Entity(repositoryClass=ContactRepository::class)
+ */
 class Contact
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom ne peut pas être vide.")
+     */
+    private $name;
 
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message="L'adresse email '{{ value }}' n'est pas valide.")
+     */
+    private $email;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le numéro de téléphone ne peut pas être vide.")]
-    #[Assert\Regex(
-        pattern: '/^0[1-9][0-9]{8}$/',
-        message: 'Veuillez entrer un numéro de téléphone valide (10 chiffres).'
-    )]
-    private ?string $phone = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le numéro de téléphone ne peut pas être vide.")
+     * @Assert\Regex(
+     *     pattern="/^0[1-9][0-9]{8}$/",
+     *     message="Veuillez entrer un numéro de téléphone valide (10 chiffres)."
+     * )
+     */
+    private $phone;
 
-    #[ORM\Column]
-    private ?int $pieces = null;
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le nombre de pièces ne peut pas être vide.")
+     */
+    private $pieces;
 
-    #[ORM\Column]
-    private ?int $m2 = null;
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le nombre de m² ne peut pas être vide.")
+     * @Assert\Positive(message="Le nombre de m² doit être positif.")
+     */
+    private $m2;
 
-    #[ORM\Column(length: 255)]
-    private ?string $habitation = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le type d'habitation ne peut pas être vide.")
+     */
+    private $habitation;
 
-    #[ORM\Column(length: 255)]
-    private ?string $foyer = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le statut de foyer ne peut pas être vide.")
+     */
+    private $foyer;
 
-   #[ORM\Column(length: 255)]
-   private ?string $styles = null;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $styles;  // Modification ici, champ de type string pour un seul choix
 
-    #[ORM\Column(type: "text")]
-    private ?string $message = null;
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $message;
 
     public function getId(): ?int
     {
@@ -59,6 +88,7 @@ class Contact
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -70,6 +100,7 @@ class Contact
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -81,6 +112,7 @@ class Contact
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
         return $this;
     }
 
@@ -92,6 +124,7 @@ class Contact
     public function setPieces(int $pieces): self
     {
         $this->pieces = $pieces;
+
         return $this;
     }
 
@@ -103,6 +136,7 @@ class Contact
     public function setM2(int $m2): self
     {
         $this->m2 = $m2;
+
         return $this;
     }
 
@@ -114,6 +148,7 @@ class Contact
     public function setHabitation(string $habitation): self
     {
         $this->habitation = $habitation;
+
         return $this;
     }
 
@@ -125,6 +160,7 @@ class Contact
     public function setFoyer(string $foyer): self
     {
         $this->foyer = $foyer;
+
         return $this;
     }
 
@@ -136,6 +172,7 @@ class Contact
     public function setStyles(?string $styles): self
     {
         $this->styles = $styles;
+
         return $this;
     }
 
@@ -144,9 +181,10 @@ class Contact
         return $this->message;
     }
 
-    public function setMessage(string $message): self
+    public function setMessage(?string $message): self
     {
         $this->message = $message;
+
         return $this;
     }
 }

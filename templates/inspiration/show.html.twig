@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ inspiration.title }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <a href="{{ path('app_inspiration_index') }}" class="btn btn-secondary mb-4">Retour à la liste des inspirations</a>
+
+        <div class="card">
+            {% if inspiration.image %}
+                <img src="{{ asset('uploads/inspirations/' ~ inspiration.image) }}" class="card-img-top" alt="{{ inspiration.title }}" style="height: 400px; object-fit: cover;">
+            {% endif %}
+            <div class="card-body">
+                <h1 class="card-title">{{ inspiration.title }}</h1>
+                <p class="card-text">{{ inspiration.content|raw }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

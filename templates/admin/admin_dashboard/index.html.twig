@@ -5,11 +5,11 @@
         <h1 class="mb-4">Dashboard Admin</h1>
 
         <!-- Bouton de déconnexion -->
-        <a href="{{ path('admin_logout') }}" class="btn btn-danger mb-3">Se déconnecter</a>
+        <a href="{{ path('admin_logout') }}" class="btn btn-danger mb-3 btn-block">Se déconnecter</a>
 
         <!-- Section Réalisations -->
         <h2 class="mb-3">Réalisations</h2>
-        <a href="{{ path('app_admin_realisation_new') }}" class="btn btn-primary mb-3">Ajouter une nouvelle réalisation</a>
+        <a href="{{ path('app_admin_entity_create', {'entityType': 'realisation'}) }}" class="btn btn-primary mb-3 btn-block">Ajouter une nouvelle réalisation</a>
         <div class="row">
             {% for realisation in realisations %}
                 <div class="col-md-4 mb-4">
@@ -19,13 +19,12 @@
                         {% endif %}
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ realisation.title }}</h5>
-                            <p class="card-text description" style="display: none;">{{ realisation.content }}</p>
                             <div class="mt-auto">
-                                <button class="btn btn-primary btn-sm voir-plus mb-2">Voir plus</button>
-                                <a href="{{ path('app_admin_realisation_edit', {'id': realisation.id}) }}" class="btn btn-secondary btn-sm">Modifier</a>
-                                <form method="post" action="{{ path('app_admin_realisation_delete', {'id': realisation.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réalisation ?');" style="display: inline-block;">
+                                <a href="{{ path('app_admin_entity_show', {'entityType': 'realisation', 'id': realisation.id}) }}" class="btn btn-primary mb-2 btn-block voir-plus">Voir plus</a>
+                                <a href="{{ path('app_admin_entity_edit', {'entityType': 'realisation', 'id': realisation.id}) }}" class="btn btn-secondary mb-2 btn-block">Modifier</a>
+                                <form method="post" action="{{ path('app_admin_entity_delete', {'entityType': 'realisation', 'id': realisation.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réalisation ?');" style="display: inline-block;">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ realisation.id) }}">
-                                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                    <button type="submit" class="btn btn-danger mb-2 btn-block">Supprimer</button>
                                 </form>
                             </div>
                         </div>
@@ -35,8 +34,8 @@
         </div>
 
         <!-- Section Formules -->
-        <h2 class="mb-3 mt-5">Formules</h2>
-        <a href="{{ path('app_admin_formule_new') }}" class="btn btn-primary mb-3">Ajouter une nouvelle formule</a>
+        <h2 class="mb-3">Formules</h2>
+        <a href="{{ path('app_admin_entity_create', {'entityType': 'formule'}) }}" class="btn btn-primary mb-3 btn-block">Ajouter une nouvelle formule</a>
         <div class="row">
             {% for formule in formules %}
                 <div class="col-md-4 mb-4">
@@ -45,14 +44,13 @@
                             <img src="{{ asset('uploads/formules/' ~ formule.image) }}" class="card-img-top" alt="{{ formule.title }}">
                         {% endif %}
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">{{ formule.titre }}</h5>
-                            <p class="card-text description" style="display: none;">{{ formule.content }}</p>
+                            <h5 class="card-title">{{ formule.title }}</h5>
                             <div class="mt-auto">
-                                <button class="btn btn-primary btn-sm voir-plus mb-2">Voir plus</button>
-                                <a href="{{ path('app_admin_formule_edit', {'id': formule.id}) }}" class="btn btn-secondary btn-sm">Modifier</a>
-                                <form method="post" action="{{ path('app_admin_formule_delete', {'id': formule.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette formule ?');" style="display: inline-block;">
+                                <a href="{{ path('app_admin_entity_show', {'entityType': 'formule', 'id': formule.id}) }}" class="btn btn-primary mb-2 btn-block voir-plus">Voir plus</a>
+                                <a href="{{ path('app_admin_entity_edit', {'entityType': 'formule', 'id': formule.id}) }}" class="btn btn-secondary mb-2 btn-block">Modifier</a>
+                                <form method="post" action="{{ path('app_admin_entity_delete', {'entityType': 'formule', 'id': formule.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette formule ?');" style="display: inline-block;">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ formule.id) }}">
-                                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                    <button type="submit" class="btn btn-danger mb-2 btn-block">Supprimer</button>
                                 </form>
                             </div>
                         </div>
@@ -62,24 +60,23 @@
         </div>
 
         <!-- Section Inspirations -->
-        <h2 class="mb-3 mt-5">Inspirations</h2>
-        <a href="{{ path('app_admin_inspiration_new') }}" class="btn btn-primary mb-3">Ajouter une nouvelle inspiration</a>
+        <h2 class="mb-3">Inspirations</h2>
+        <a href="{{ path('app_admin_entity_create', {'entityType': 'inspiration'}) }}" class="btn btn-primary mb-3 btn-block">Ajouter une nouvelle inspiration</a>
         <div class="row">
             {% for inspiration in inspirations %}
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         {% if inspiration.image %}
-                            <img src="{{ asset('uploads/inspirations/' ~ inspiration.image) }}" class="card-img-top" alt="{{ inspiration.titre }}">
+                            <img src="{{ asset('uploads/inspirations/' ~ inspiration.image) }}" class="card-img-top" alt="{{ inspiration.title }}">
                         {% endif %}
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">{{ inspiration.titre }}</h5>
-                            <p class="card-text description" style="display: none;">{{ inspiration.description }}</p>
+                            <h5 class="card-title">{{ inspiration.title }}</h5>
                             <div class="mt-auto">
-                                <button class="btn btn-primary btn-sm voir-plus mb-2">Voir plus</button>
-                                <a href="{{ path('app_admin_inspiration_edit', {'id': inspiration.id}) }}" class="btn btn-secondary btn-sm">Modifier</a>
-                                <form method="post" action="{{ path('app_admin_inspiration_delete', {'id': inspiration.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette inspiration ?');" style="display: inline-block;">
+                                <a href="{{ path('app_admin_entity_show', {'entityType': 'inspiration', 'id': inspiration.id}) }}" class="btn btn-primary mb-2 btn-block voir-plus">Voir plus</a>
+                                <a href="{{ path('app_admin_entity_edit', {'entityType': 'inspiration', 'id': inspiration.id}) }}" class="btn btn-secondary mb-2 btn-block">Modifier</a>
+                                <form method="post" action="{{ path('app_admin_entity_delete', {'entityType': 'inspiration', 'id': inspiration.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette inspiration ?');" style="display: inline-block;">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ inspiration.id) }}">
-                                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                    <button type="submit" class="btn btn-danger mb-2 btn-block">Supprimer</button>
                                 </form>
                             </div>
                         </div>
@@ -87,12 +84,10 @@
                 </div>
             {% endfor %}
         </div>
-
     </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <!-- JavaScript pour afficher/masquer les descriptions -->
     <script src="{{ asset('js/admin-dashboard.js') }}"></script>
 {% endblock %}

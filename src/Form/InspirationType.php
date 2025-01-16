@@ -15,8 +15,8 @@ class InspirationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre', TextType::class)
-            ->add('texte', TextareaType::class)
+            ->add('title', TextType::class)
+            ->add('content', TextareaType::class)
             ->add('image', FileType::class, [
                 'label' => 'Image',
                 'mapped' => false,

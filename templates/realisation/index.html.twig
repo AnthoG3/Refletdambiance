@@ -12,8 +12,7 @@
                         {% endif %}
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ realisation.title }}</h5>
-                            <p class="card-text description" style="display: none;">{{ realisation.content }}</p>
-                            <button class="btn btn-primary voir-plus mt-auto">Voir plus</button>
+                            <a href="{{ path('app_realisation_show', {'id': realisation.id}) }}" class="btn btn-primary voir-plus mt-auto">Voir plus</a>
                         </div>
                     </div>
                 </div>
@@ -24,5 +23,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/realisations.js') }}"></script>
+    <script src="{{ asset('js/admin-dashboard.js') }}"></script>
 {% endblock %}

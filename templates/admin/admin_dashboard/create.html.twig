@@ -1,12 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{% if realisation is defined %}Modifier{% else %}Nouvelle{% endif %} Réalisation</h1>
-
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit">Enregistrer</button>
-    {{ form_end(form) }}
-
-    <a href="{{ path('app_admin_dashboard') }}">Retour au dashboard</a>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>{{ title|default('Ajouter') }}</h1>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                {% for field in form %}
+                    {% if field.vars.name != '_token' %}
+                        <div class="mb-3">
+                            {{ form_label(field) }}
+                            {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(field) }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success">Enregistrer</button>
+                <a href="{{ path('app_admin_dashboard') }}" class="btn btn-secondary">Annuler</a>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

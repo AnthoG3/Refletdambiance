@@ -1,14 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const voirPlusButtons = document.querySelectorAll('.voir-plus');
-    voirPlusButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const description = this.closest('.card-body').querySelector('.description');
-            if (description.style.display === 'none') {
-                description.style.display = 'block';
-                this.textContent = 'Voir moins';
+    console.log("JavaScript chargé et prêt.");
+
+    const buttons = document.querySelectorAll('.voir-plus');
+
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            const detailUrl = button.getAttribute('href');
+            if (detailUrl) {
+                window.location.href = detailUrl;
             } else {
-                description.style.display = 'none';
-                this.textContent = 'Voir plus';
+                console.error("URL de détail non trouvée");
             }
         });
     });

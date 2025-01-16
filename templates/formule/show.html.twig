@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ formule.title }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <a href="{{ path('app_formule_index') }}" class="btn btn-secondary mb-4">Retour à la liste des formules</a>
+
+        <div class="card">
+            {% if formule.image %}
+                <img src="{{ asset('uploads/formules/' ~ formule.image) }}" class="card-img-top" alt="{{ formule.title }}" style="height: 400px; object-fit: cover;">
+            {% endif %}
+            <div class="card-body">
+                <h1 class="card-title">{{ formule.title }}</h1>
+                <p class="card-text">{{ formule.content|raw }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

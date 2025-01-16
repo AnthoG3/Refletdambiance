@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nouvelle demande de contact</title>
+</head>
+<body>
+<h1>Nouvelle demande de contact</h1>
+
+<p>Une nouvelle demande de contact a été soumise via le formulaire du site web :</p>
+
+<ul>
+    <li><strong>Nom :</strong> {{ contact.name }}</li>
+    <li><strong>Email :</strong> {{ contact.email }}</li>
+    <li><strong>Téléphone :</strong> {{ contact.phone }}</li>
+    <li><strong>Nombre de pièces :</strong> {{ contact.pieces }}</li>
+    <li><strong>Surface (m²) :</strong> {{ contact.m2 }}</li>
+    <li><strong>Type d'habitation :</strong> {{ contact.habitation }}</li>
+    <li><strong>Statut :</strong> {{ contact.foyer }}</li>
+    <li><strong>Styles souhaités :</strong> {{ contact.styles }}</li>
+</ul>
+
+<h2>Message :</h2>
+<p>{{ contact.message|nl2br }}</p>
+
+<p>Veuillez traiter cette demande dans les plus brefs délais.</p>
+</body>
+</html>

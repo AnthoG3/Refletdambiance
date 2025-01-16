@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails - {{ entity.title }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">{{ entity_type|capitalize }} - {{ entity.title }}</h1>
+
+        <div class="text-center mb-4">
+            <a href="{{ path('app_admin_dashboard') }}" class="btn btn-secondary">Retour au tableau de bord</a>
+        </div>
+
+        <div class="card">
+            {% if entity.image %}
+                <img src="{{ asset('uploads/' ~ entity_type ~ 's/' ~ entity.image) }}" class="card-img-top" alt="{{ entity.title }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ entity.title }}</h5>
+                <p class="card-text">{{ entity.content|raw }}</p>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4 gap-3">
+            <a href="{{ path('app_admin_entity_edit', {'entityType': entity_type, 'id': entity.id}) }}" class="btn btn-primary">Modifier</a>
+            <form action="{{ path('app_admin_entity_delete', {'entityType': entity_type, 'id': entity.id}) }}" method="post" style="display:inline;">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ entity.id) }}">
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
