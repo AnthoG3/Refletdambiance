@@ -1,19 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ realisation.title }}{% endblock %}
+{% block metatitle %}Réalisations | Reflet d'ambiance{% endblock %}
+
+{% block title %}Détails de la réalisation - {{ realisation.title }}{% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
-        <a href="{{ path('app_realisation_index') }}" class="btn btn-secondary mb-4">Retour à la liste des réalisations</a>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Réalisation : {{ realisation.title }}</h1>
 
-        <div class="card">
+        <div class="card mt-4">
             {% if realisation.image %}
-                <img src="{{ asset('uploads/realisations/' ~ realisation.image) }}" class="card-img-top" alt="{{ realisation.title }}" style="height: 400px; object-fit: cover;">
+                <img src="{{ asset('uploads/realisations/' ~ realisation.image) }}" class="card-img-top" alt="{{ realisation.title }}">
             {% endif %}
             <div class="card-body">
-                <h1 class="card-title">{{ realisation.title }}</h1>
-                <p class="card-text">{{ realisation.content|raw }}</p>
+                <h5 class="card-title">{{ realisation.title }}</h5>
+                <!-- Application de la classe 'formatted-content' -->
+                <p class="card-text formatted-content">{{ realisation.content|raw }}</p>
             </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ path('app_realisation_index') }}" class="btn btn-secondary">Retour aux réalisations</a>
         </div>
     </div>
 {% endblock %}

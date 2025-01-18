@@ -1,9 +1,23 @@
 {% extends 'base.html.twig' %}
 
+{% block metatitle %}Accueil | Reflet d'ambiance{% endblock %}
+
 {% block body %}
     <div class="container">
         <img class="home_wall" src="{{ asset('assets/image/fond_accueil.jpg') }}" alt="logo.accueil">
         <h2 id="round_title">Reflet d'ambiance</h2>
+    </div>
+
+    <!-- Déplacer l'affichage des messages flash ici, avant le formulaire -->
+    <div class="container">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label == 'error' ? 'danger' : label }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
     </div>
 
     <div class="container">
@@ -12,13 +26,17 @@
                 <img class="image-ronde" src="{{ asset('assets/image/oceane.jpg') }}" alt="Océane">
             </div>
             <div class="text-container">
-                <h2 class="card-title">Présentation</h2>
+                <h2 class="card-title">A propos de moi</h2>
                 <p>
-                    Je m'appelle Océane VITRAC-MULLER,<br>
-                    Je suis mariée et maman de deux petites filles.<br>
-                    Vous faites construire, vous rénovez ou vous avez simplement envie de changer votre déco ?<br>
-                    De la planche ambiance à la représentation 3D en passant par la planche mobilier,<br>
-                    je suis là pour vous aider à vous projeter et mettre votre bien en valeur.<br>
+                    Je m’appelle Océane VITRAC-MULLER, mariée et maman de deux petites filles.<br>
+                    <br>
+                    Vous faites construire, vous rénovez ou simplement vous avez envie de changer votre déco ? <br>
+                    De la planche ambiance à la représentation 3D en passant par la planche mobilier, je suis là <br>
+                    pour vous aider à vous projeter.<br>
+                    <br>
+
+                    📍 Région Bordelaise & Cap ferret ou à distance
+                    partout en France.
                 </p>
             </div>
         </div>
@@ -27,16 +45,6 @@
     <div class="card contact-card">
         <div class="card-body">
             <div class="container">
-
-                {% for label, messages in app.flashes %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ label == 'error' ? 'danger' : label }} alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-
                 <div class="row">
                     <h1 class="text-center" id="contact">Formulaire de contact</h1>
                     <div class="col">
@@ -89,6 +97,18 @@
                                 {{ form_label(contactForm.styles, 'Quelle ambiance souhaitez-vous :') }}
                                 {{ form_widget(contactForm.styles, {'attr': {'class': 'form-select'}}) }}
                                 {{ form_errors(contactForm.styles) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(contactForm.formule, 'Quelle formule souhaitez-vous :') }}
+                                {{ form_widget(contactForm.formule, {'attr': {'class': 'form-select'}}) }}
+                                {{ form_errors(contactForm.formule) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(contactForm.rappel, 'Comment souhaitez-vous être recontacté ?') }}
+                                {{ form_widget(contactForm.rappel, {'attr': {'class': 'form-select'}}) }}
+                                {{ form_errors(contactForm.rappel) }}
                             </div>
 
                             <div class="form-group">

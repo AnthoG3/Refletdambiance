@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block metatitle %}Réalisations | Reflet d'ambiance{% endblock %}
+
 {% block body %}
     <div class="container mt-4">
         <h1 class="mb-4">Nos Réalisations</h1>
@@ -21,7 +23,4 @@
     </div>
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/admin-dashboard.js') }}"></script>
-{% endblock %}
+

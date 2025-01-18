@@ -1,19 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ formule.title }}{% endblock %}
+{% block metatitle %}Formules | Reflet d'ambiance{% endblock %}
+
+{% block title %}Détails de la formule - {{ formule.title }}{% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
-        <a href="{{ path('app_formule_index') }}" class="btn btn-secondary mb-4">Retour à la liste des formules</a>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Formule : {{ formule.title }}</h1>
 
-        <div class="card">
+        <div class="card mt-4">
             {% if formule.image %}
-                <img src="{{ asset('uploads/formules/' ~ formule.image) }}" class="card-img-top" alt="{{ formule.title }}" style="height: 400px; object-fit: cover;">
+                <img src="{{ asset('uploads/formules/' ~ formule.image) }}" class="card-img-top" alt="{{ formule.title }}">
             {% endif %}
             <div class="card-body">
-                <h1 class="card-title">{{ formule.title }}</h1>
-                <p class="card-text">{{ formule.content|raw }}</p>
+                <h5 class="card-title">{{ formule.title }}</h5>
+                <!-- Utilisation de la classe CSS pour appliquer la mise en forme -->
+                <p class="card-text formatted-content">{{ formule.content|raw }}</p>
             </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ path('app_formule_index') }}" class="btn btn-secondary">Retour aux formules</a>
         </div>
     </div>
 {% endblock %}

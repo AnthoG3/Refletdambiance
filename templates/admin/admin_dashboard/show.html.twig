@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
+{% block metatitle %}Tableau de bord | Reflet d'ambiance{% endblock %}
+
+
 {% block title %}Détails - {{ entity.title }}{% endblock %}
 
 {% block body %}
@@ -16,7 +19,7 @@
             {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{ entity.title }}</h5>
-                <p class="card-text">{{ entity.content|raw }}</p>
+                <p class="card-text formatted-content">{{ entity.content|raw }}</p>
             </div>
         </div>
 

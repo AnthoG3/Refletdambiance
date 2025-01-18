@@ -5,10 +5,8 @@ namespace App\Repository;
 use App\Entity\Formule;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
-/**
- * @extends ServiceEntityRepository<Formule>
- */
 class FormuleRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,28 +14,13 @@ class FormuleRepository extends ServiceEntityRepository
         parent::__construct($registry, Formule::class);
     }
 
-    //    /**
-    //     * @return Formules[] Returns an array of Formules objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('f')
-    //            ->andWhere('f.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('f.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function searchByTerm(string $term)
+    {
+        $queryBuilder = $this->createQueryBuilder('f')
+            ->andWhere('LOWER(f.title) LIKE LOWER(:term) OR LOWER(f.content) LIKE LOWER(:term)')
+            ->setParameter('term', '%' . $term . '%')
+            ->orderBy('f.createdAt', 'DESC');
 
-    //    public function findOneBySomeField($value): ?Formules
-    //    {
-    //        return $this->createQueryBuilder('f')
-    //            ->andWhere('f.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

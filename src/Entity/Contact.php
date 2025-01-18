@@ -73,6 +73,19 @@ class Contact
     /**
      * @ORM\Column(type="text", nullable=true)
      */
+
+    private $formule;
+
+    /**
+     * @ORM\Column (type="text" , nullable=true)
+     */
+
+    private $rappel;
+
+    /**
+     * @ORM\Column (type="text" , nullable=true)
+     */
+
     private $message;
 
     public function getId(): ?int
@@ -176,6 +189,27 @@ class Contact
         return $this;
     }
 
+    public function getFormule(): ?string
+    {
+        return $this->formule;
+    }
+    public function setFormule(?string $formule): self
+    {
+        $this->formule = $formule;
+        return $this;
+    }
+
+
+    public function getRappel(): ?string
+    {
+        return $this->rappel;
+    }
+
+    public function setRappel(?string $rappel): self
+    {
+        $this->rappel = $rappel;
+        return $this;
+    }
     public function getMessage(): ?string
     {
         return $this->message;

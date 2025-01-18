@@ -28,10 +28,6 @@ class HomeController extends AbstractController
         // Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Récupération du champ styles
-            // Ce champ contient maintenant une seule valeur (chaîne), pas un tableau
-            $selectedStyle = $contact->getStyles();
-
             // Création de l'email à envoyer
             $email = (new Email())
                 ->from('contact@refletdambiance.fr')
@@ -76,39 +72,47 @@ class HomeController extends AbstractController
                     <table>
                         <tr>
                             <td class="label">Nom :</td>
-                            <td>' . $contact->getName() . '</td>
+                            <td>' . htmlspecialchars($contact->getName()) . '</td>
                         </tr>
                         <tr>
                             <td class="label">Email :</td>
-                            <td>' . $contact->getEmail() . '</td>
+                            <td>' . htmlspecialchars($contact->getEmail()) . '</td>
                         </tr>
                         <tr>
                             <td class="label">Téléphone :</td>
-                            <td>' . $contact->getPhone() . '</td>
+                            <td>' . htmlspecialchars($contact->getPhone()) . '</td>
                         </tr>
                         <tr>
                             <td class="label">Nb de pièces :</td>
-                            <td>' . $contact->getPieces() . '</td>
+                            <td>' . htmlspecialchars($contact->getPieces()) . '</td>
                         </tr>
                         <tr>
-                            <td class="label">M2 :</td>
-                            <td>' . $contact->getM2() . '</td>
+                            <td class="label">M² :</td>
+                            <td>' . htmlspecialchars($contact->getM2()) . '</td>
                         </tr>
                         <tr>
                             <td class="label">Habitation :</td>
-                            <td>' . $contact->getHabitation() . '</td>
+                            <td>' . htmlspecialchars($contact->getHabitation()) . '</td>
                         </tr>
                         <tr>
                             <td class="label">Foyer :</td>
-                            <td>' . $contact->getFoyer() . '</td>
+                            <td>' . htmlspecialchars($contact->getFoyer()) . '</td>
                         </tr>
                         <tr>
                             <td class="label">Style :</td>
-                            <td>' . $selectedStyle . '</td>
+                            <td>' . htmlspecialchars($contact->getStyles()) . '</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Formule :</td>
+                            <td>' . htmlspecialchars($contact->getFormule()) . '</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Rappel :</td>
+                            <td>' . htmlspecialchars($contact->getRappel()) . '</td>
                         </tr>
                         <tr>
                             <td class="label">Message :</td>
-                            <td>' . nl2br($contact->getMessage()) . '</td>
+                            <td>' . nl2br(htmlspecialchars($contact->getMessage())) . '</td>
                         </tr>
                     </table>
                 </div>
@@ -116,17 +120,14 @@ class HomeController extends AbstractController
         </html>'
                 );
 
-
             // Envoi de l'email via le service Mailer
             $mailer->send($email);
 
             // Message flash pour indiquer le succès de l'envoi
             $this->addFlash('success', 'Votre message a été envoyé avec succès.');
 
-            // Redirection après soumission du formulaire
-            return $this->render('home.html.twig', [
-                'contactForm' => $form->createView(),
-            ]);
+            // Redirection vers la page d'accueil pour afficher un formulaire vide
+            return $this->redirectToRoute('home');
         }
 
         // Affichage du formulaire dans la vue si le formulaire n'est pas soumis ou non valide

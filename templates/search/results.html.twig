@@ -1,0 +1,40 @@
+{% block body %}
+    <h3>Résultats pour "{{ search }}"</h3>
+
+    {% if results is empty %}
+        <p>Aucun résultat trouvé.</p>
+    {% else %}
+        <h4>Réalisations</h4>
+        {% if results.realisation is empty %}
+            <p>Aucune réalisation trouvée.</p>
+        {% else %}
+            <ul>
+                {% for result in results.realisation %}
+                    <li>{{ result.title }} - {{ result.content }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <h4>Formules</h4>
+        {% if results.formule is empty %}
+            <p>Aucune formule trouvée.</p>
+        {% else %}
+            <ul>
+                {% for result in results.formule %}
+                    <li>{{ result.title }} - {{ result.content }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <h4>Inspirations</h4>
+        {% if results.inspiration is empty %}
+            <p>Aucune inspiration trouvée.</p>
+        {% else %}
+            <ul>
+                {% for result in results.inspiration %}
+                    <li>{{ result.title }} - {{ result.content }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+{% endblock %}

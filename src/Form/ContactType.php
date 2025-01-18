@@ -85,6 +85,7 @@ class ContactType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'label_attr' => ['class' => 'form-label'],
                 'choices' => [
+                    'Choisissez une option' => '',
                     'Cocooning' => 'cocooning',
                     'Pastel' => 'pastel',
                     'Chalet' => 'chalet',
@@ -106,6 +107,32 @@ class ContactType extends AbstractType
                 'expanded' => false,
                 'multiple' => false,  // Permet une seule sélection
                 'required' => false,
+            ])
+
+            ->add('formule', ChoiceType::class, [
+                'label' => 'Formule',
+                'attr' => ['class' => 'form-control'],
+                'label_attr' => ['class' => 'form-label'],
+                'choices' => [
+                    'Choisissez une option' => '',
+                    'Formule ambiance' => 'ambiance',
+                    'Formule ambiance shopping' => 'ambiance/shopping',
+                    'Formule perspective' => 'perspective',
+                    'Formule complète' => 'complete',
+                    'Formule à définir' => 'indefini'
+
+                ]
+            ])
+
+            ->add('rappel', ChoiceType::class, [
+                'label' => 'Contact',
+                'attr' => ['class' => 'form-control'],
+                'label_attr' => ['class' => 'form-label'],
+                'choices' => [
+                    'Choisissez une option' => '',
+                    'Téléphone' => 'telephone',
+                    'Mail' => 'mail',
+                ]
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'Description du projet',

@@ -1,8 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{% block metatitle %}Tableau de bord | Reflet d'ambiance{% endblock %}
+
+
 {% block body %}
     <div class="container">
         <h1 class="mb-4">Dashboard Admin</h1>
+
+        <!-- Affichage des messages flash ici -->
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label == 'error' ? 'danger' : label }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
 
         <!-- Bouton de déconnexion -->
         <a href="{{ path('admin_logout') }}" class="btn btn-danger mb-3 btn-block">Se déconnecter</a>
@@ -13,7 +26,7 @@
         <div class="row">
             {% for realisation in realisations %}
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card admin-card h-100">
                         {% if realisation.image %}
                             <img src="{{ asset('uploads/realisations/' ~ realisation.image) }}" class="card-img-top" alt="{{ realisation.title }}">
                         {% endif %}
@@ -39,7 +52,7 @@
         <div class="row">
             {% for formule in formules %}
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card admin-card h-100">
                         {% if formule.image %}
                             <img src="{{ asset('uploads/formules/' ~ formule.image) }}" class="card-img-top" alt="{{ formule.title }}">
                         {% endif %}
@@ -65,7 +78,7 @@
         <div class="row">
             {% for inspiration in inspirations %}
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card admin-card h-100">
                         {% if inspiration.image %}
                             <img src="{{ asset('uploads/inspirations/' ~ inspiration.image) }}" class="card-img-top" alt="{{ inspiration.title }}">
                         {% endif %}
@@ -85,9 +98,4 @@
             {% endfor %}
         </div>
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/admin-dashboard.js') }}"></script>
 {% endblock %}

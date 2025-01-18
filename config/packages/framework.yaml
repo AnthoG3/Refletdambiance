@@ -7,14 +7,10 @@ framework:
         # La gestion de la session est activée par défaut
         enabled: true
         handler_id: null # Cela utilise la gestion par défaut de Symfony
-        cookie_secure: auto # Configure automatiquement si le cookie doit être sécurisé (utile si votre site utilise HTTPS)
+        cookie_secure: auto # Configure automatiquement si le cookie doit être sécurisé.
         cookie_httponly: true # Pour des raisons de sécurité, empêche l'accès au cookie via JavaScript
         cookie_samesite: 'lax' # Politique de SameSite des cookies (en minuscules)
-        gc_maxlifetime: 3600 # Durée de vie du cookie de session (en secondes)
-
-    # Commentaires pour d'autres options :
-    # esi: true
-    # fragments: true
+        gc_maxlifetime: 1200 # Durée de vie du cookie de session (en secondes), ici 20 minutes.
 
 when@test:
     framework:
