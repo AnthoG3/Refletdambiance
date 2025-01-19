@@ -13,8 +13,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
@@ -59,7 +57,6 @@
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_realisation_index') }}">Réalisations</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_inspiration_index') }}">Inspirations</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_formule_index') }}">Formules</a></li>
-
                     <li class="nav-item"><a class="nav-link" href="{{ path('home') }}#contact">Contact</a></li>
                     <li class="nav-item">
                         <a href="https://www.instagram.com/refletdambiance" target="_blank" class="nav-link">
@@ -68,8 +65,8 @@
                         </a>
                     </li>
                 </ul>
-                <form class="d-flex" method="get" action="">
-                    <input class="form-control search-input" type="search" name="search" placeholder="Rechercher..." aria-label="Rechercher" value="{{ app.request.query.get('search') }}">
+                <form class="d-flex" method="get" action="{{ path('search') }}">
+                    <input class="form-control search-input" type="search" name="q" placeholder="Rechercher..." aria-label="Rechercher" value="{{ app.request.query.get('q') }}">
                     <button class="btn btn-outline-light" type="submit">Rechercher</button>
                 </form>
             </div>
@@ -99,6 +96,7 @@
 
 
     <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -31,8 +31,8 @@ class HomeController extends AbstractController
             // Création de l'email à envoyer
             $email = (new Email())
                 ->from('contact@refletdambiance.fr')
-                ->to('anthony.gevers@lapiscine.pro') // Changez l'adresse e-mail de destination
-                ->subject('Nouveau message de contact')
+                ->to('anthony.gevers@lapiscine.pro')
+                ->subject('Vous avez une nouvelle demande de contact')
                 ->html(
                     '<html>
             <head>
@@ -51,7 +51,7 @@ class HomeController extends AbstractController
                         box-shadow: 0 0 10px rgba(0,0,0,0.1);
                     }
                     h2 {
-                        color: #4CAF50;
+                    color: #aeaf62;
                     }
                     table {
                         width: 100%;

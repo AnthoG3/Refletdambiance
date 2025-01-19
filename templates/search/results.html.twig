@@ -1,40 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block metatitle %}Résultats de recherche{% endblock %}
+
 {% block body %}
-    <h3>Résultats pour "{{ search }}"</h3>
+    <div class="container my-5">
+        <h1>Résultats de recherche pour "{{ query }}"</h1>
 
-    {% if results is empty %}
-        <p>Aucun résultat trouvé.</p>
-    {% else %}
-        <h4>Réalisations</h4>
-        {% if results.realisation is empty %}
-            <p>Aucune réalisation trouvée.</p>
+        {% if results.formules is empty and results.inspirations is empty and results.realisations is empty %}
+            <p>Aucun résultat trouvé.</p>
         {% else %}
-            <ul>
-                {% for result in results.realisation %}
-                    <li>{{ result.title }} - {{ result.content }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+            {% if results.formules is not empty %}
+                <h2>Formules</h2>
+                <ul>
+                    {% for formule in results.formules %}
+                        <li>
+                            <a href="{{ path('app_formule_show', {'id': formule.id}) }}">{{ formule.title }}</a>
+                            <p>{{ formule.content[:150] ~ '...' }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
-        <h4>Formules</h4>
-        {% if results.formule is empty %}
-            <p>Aucune formule trouvée.</p>
-        {% else %}
-            <ul>
-                {% for result in results.formule %}
-                    <li>{{ result.title }} - {{ result.content }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+            {% if results.inspirations is not empty %}
+                <h2>Inspirations</h2>
+                <ul>
+                    {% for inspiration in results.inspirations %}
+                        <li>
+                            <a href="{{ path('app_inspiration_show', {'id': inspiration.id}) }}">{{ inspiration.title }}</a>
+                            <p>{{ inspiration.content[:150] ~ '...' }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
-        <h4>Inspirations</h4>
-        {% if results.inspiration is empty %}
-            <p>Aucune inspiration trouvée.</p>
-        {% else %}
-            <ul>
-                {% for result in results.inspiration %}
-                    <li>{{ result.title }} - {{ result.content }}</li>
-                {% endfor %}
-            </ul>
+            {% if results.realisations is not empty %}
+                <h2>Réalisations</h2>
+                <ul>
+                    {% for realisation in results.realisations %}
+                        <li>
+                            <a href="{{ path('app_realisation_show', {'id': realisation.id}) }}">{{ realisation.title }}</a>
+                            <p>{{ realisation.content[:150] ~ '...' }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         {% endif %}
-    {% endif %}
+    </div>
 {% endblock %}
