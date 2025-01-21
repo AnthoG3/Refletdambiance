@@ -1,47 +1,44 @@
 security:
+    # Configuration des hachages de mot de passe
     password_hashers:
-        App\Entity\Admin: 'auto'
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        App\Entity\Admin: 'auto'  # Utilisation du hachage par défaut pour les mots de passe des administrateurs
 
     providers:
         app_admin_provider:
             entity:
                 class: App\Entity\Admin
-                property: email
+                property: email  # L'email est utilisé comme identifiant unique pour l'authentification
 
     firewalls:
         dev:
+            # Le firewall de développement pour certaines ressources comme le profiler et les fichiers statiques
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
         admin:
-            lazy: true
-            provider: app_admin_provider
-            pattern: ^/admin
+            lazy: true  # Le firewall pour l'admin est "lazy", il est activé uniquement lorsqu'une requête pour /admin est faite
+            provider: app_admin_provider  # Utilise le provider défini plus haut pour récupérer les administrateurs
+            pattern: ^/admin  # Ce firewall protège toutes les routes commençant par "/admin"
             form_login:
-                login_path: admin_login
-                check_path: admin_login
-                default_target_path: app_admin_dashboard
-                username_parameter: email
-                password_parameter: password
+                login_path: admin_login  # La route pour afficher le formulaire de connexion
+                check_path: admin_login  # La route pour traiter les données de connexion envoyées par le formulaire
+                default_target_path: app_admin_dashboard  # Redirige vers le tableau de bord après une connexion réussie
+                username_parameter: email  # Contient l'email dans le formulaire
+                password_parameter: password  # Contient le mot de passe dans le formulaire
             logout:
-                path: admin_logout
-                target: admin_login                  # Redigire vers la page de connexion après déconnexion
-
-
-
-
-
+                path: admin_logout  # La route pour la déconnexion
+                target: admin_login  # Redirige vers la page de connexion après la déconnexion
 
     access_control:
-        - { path: ^/admin/login, roles: PUBLIC_ACCESS }
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin/login, roles: PUBLIC_ACCESS }  # Permet un accès public à la page de connexion (accessible sans authentification)
+        - { path: ^/admin, roles: ROLE_ADMIN }  # Seul un utilisateur avec le rôle ROLE_ADMIN peut accéder aux pages sous /admin
 
+# Configuration spécifique à l'environnement de test (tests unitaires, tests d'intégration)
 when@test:
     security:
         password_hashers:
             App\Entity\Admin:
-                algorithm: auto
-                cost: 4
+                algorithm: auto  # Hachage automatique des mots de passe pendant les tests
+                cost: 4  # Réduit les coûts de hachage pour accélérer les tests
                 time_cost: 3
                 memory_cost: 10

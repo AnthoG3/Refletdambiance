@@ -17,11 +17,12 @@ class RealisationType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
+            ->add('content', TextareaType::class)
             ->add('image', FileType::class, [
+                'label' => 'Image',
                 'mapped' => false,
                 'required' => false
             ])
-            ->add('content', TextareaType::class)
             ->add('createdAt', DateTimeType::class, [
                 'widget' => 'single_text',
             ]);

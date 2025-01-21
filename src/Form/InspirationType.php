@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Inspiration;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -22,7 +23,9 @@ class InspirationType extends AbstractType
                 'mapped' => false,
                 'required' => false
             ])
-        ;
+            ->add('createdAt', DateTimeType::class, [
+                'widget' => 'single_text',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -138,6 +138,7 @@ class ContactType extends AbstractType
                 'label' => 'Description du projet',
                 'attr' => ['class' => 'form-control'],
                 'label_attr' => ['class' => 'form-label'],
+                'required' => false,
             ]);
     }
 

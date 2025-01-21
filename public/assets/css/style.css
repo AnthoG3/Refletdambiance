@@ -28,6 +28,11 @@ body {
   overflow: hidden;
 }
 
+.search-input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 #round_title {
   position: absolute;
   left: 5%;
@@ -56,7 +61,10 @@ body {
   -webkit-box-orient: vertical;
 }
 
-#contact_title, .card-title, h1, .nav-link {
+#contact_title,
+.card-title,
+h1,
+.nav-link {
   font-family: "Dancing Script", serif;
 }
 
@@ -112,6 +120,7 @@ body {
 .presentation-card {
   width: 80%;
   margin: auto;
+  bottom: 3vh;
 }
 
 .contact-card .card-body {
@@ -168,8 +177,12 @@ body {
   display: block;
 }
 
-button[type=submit], .btn, .btn-primary, .btn-secondary, .btn-danger {
-  padding: 12px 20px; /* Taille uniforme */
+button[type=submit],
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  padding: 12px 20px;
   background-color: #f0ede4;
   color: #040705;
   border: 1px solid black;
@@ -183,7 +196,8 @@ button[type=submit], .btn, .btn-primary, .btn-secondary, .btn-danger {
   transition: background-color 0.3s, color 0.3s;
 }
 
-button[type=submit]:hover, .btn:hover {
+button[type=submit]:hover,
+.btn:hover {
   background-color: black;
   color: white;
 }
@@ -247,7 +261,8 @@ h1 {
 }
 
 @media (min-width: 768px) {
-  .presentation-card, .contact-card {
+  .presentation-card,
+  .contact-card {
     flex-direction: row;
   }
   .image-container {

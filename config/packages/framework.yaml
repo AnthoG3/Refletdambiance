@@ -1,4 +1,3 @@
-# see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     secret: '%env(APP_SECRET)%'
 
@@ -6,14 +5,23 @@ framework:
     session:
         # La gestion de la session est activée par défaut
         enabled: true
-        handler_id: null # Cela utilise la gestion par défaut de Symfony
-        cookie_secure: auto # Configure automatiquement si le cookie doit être sécurisé.
-        cookie_httponly: true # Pour des raisons de sécurité, empêche l'accès au cookie via JavaScript
-        cookie_samesite: 'lax' # Politique de SameSite des cookies (en minuscules)
-        gc_maxlifetime: 1200 # Durée de vie du cookie de session (en secondes), ici 20 minutes.
+        handler_id: null # Utilise la gestion par défaut de Symfony pour les sessions
+        cookie_secure: auto # Configure automatiquement si le cookie doit être sécurisé en fonction de HTTPS.
+        cookie_httponly: true # Empêche l'accès au cookie via JavaScript pour réduire les risques de XSS --> insertion de code malveillant
+        cookie_samesite: 'lax' # Politique de SameSite pour les cookies pour améliorer la sécurité
+        # Durée maximale de la session côté serveur (en secondes)
+        gc_maxlifetime: 1200  # 20 minutes
+        # Durée de vie du cookie de session côté client (en secondes)
+        cookie_lifetime: 1200 # 20 minutes
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%' # Définit un chemin de sauvegarde explicite pour les sessions
 
 when@test:
     framework:
         test: true
         session:
             storage_factory_id: session.storage.factory.mock_file
+
+
+
+
+
