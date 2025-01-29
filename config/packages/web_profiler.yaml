@@ -1,17 +1,41 @@
 when@dev:
     web_profiler:
+        # Active la barre d'outils de débogage dans l'environnement de développement.
+        # Cette barre d'outils s'affiche en bas de chaque page et fournit des informations utiles,
+        # telles que les logs, les requêtes SQL, le temps d'exécution, l'utilisation mémoire, etc.
         toolbar: true
+
+        # Désactive l'interception automatique des redirections HTTP.
+        # Si défini sur `true`, Symfony intercepte les redirections pour afficher une page intermédiaire,
+        # ce qui permet de déboguer les redirections.
         intercept_redirects: false
 
     framework:
         profiler:
+            # Collecte les données pour toutes les requêtes, y compris celles qui réussissent.
+            # Lorsque défini sur `true`, le profiler collecte les données même si aucune erreur n'a été générée,
+            # ce qui est utile pour analyser les performances et les comportements des requêtes réussies.
             only_exceptions: false
+
+            # Active la collecte des données relatives au sérialiseur.
+            # Cela permet de déboguer les opérations de sérialisation ou de désérialisation,
+            # notamment lorsque des objets ou des données JSON/XML sont manipulés.
             collect_serializer_data: true
 
 when@test:
     web_profiler:
+        # Désactive la barre d'outils de débogage dans l'environnement de test.
+        # Cela évite le rendu inutile de la barre d'outils et réduit les ressources utilisées,
+        # accélérant ainsi les tests automatisés.
         toolbar: false
+
+        # Désactive également l'interception des redirections dans l'environnement de test.
+        # Les redirections s'exécutent normalement, ce qui est essentiel pour garantir
+        # que les tests ne sont pas affectés par des fonctionnalités de débogage inutiles.
         intercept_redirects: false
 
     framework:
-        profiler: { collect: false }
+        profiler:
+            # Désactive complètement la collecte des données du profiler dans l'environnement de test.
+            # Cela réduit la consommation de mémoire et améliore les performances des tests.
+            collect: false

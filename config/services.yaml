@@ -4,29 +4,34 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    realisations_directory: '%kernel.project_dir%/public/uploads/realisations'
-    formules_directory: '%kernel.project_dir%/public/uploads/formules'
-    inspirations_directory: '%kernel.project_dir%/public/uploads/inspirations'  # Ajout du paramètre inspirations_directory
+    # Les paramètres suivants définissent des chemins relatifs aux répertoires de l'application pour le stockage de certains types de fichiers (réalisations, formules, inspirations).
+    # '%kernel.project_dir%' est une variable Symfony qui fait référence au répertoire racine de votre projet (là où se trouve le fichier composer.json).
+    # Ces répertoires sont probablement utilisés pour stocker des fichiers téléchargés ou générés par l'application.
+    realisations_directory: '%kernel.project_dir%/public/uploads/realisations'  # Chemin pour les répertoires des réalisations
+    formules_directory: '%kernel.project_dir%/public/uploads/formules'      # Chemin pour les répertoires des formules
+    inspirations_directory: '%kernel.project_dir%/public/uploads/inspirations'  # Chemin pour les répertoires des inspirations
 
 services:
-    # default configuration for services in *this* file
+    # Configuration par défaut pour les services dans *ce* fichier
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true      # Autowire permet à Symfony d'injecter automatiquement les dépendances dans les services.
+        autoconfigure: true # Autoconfigure permet à Symfony de configurer automatiquement vos services en tant que commandes, abonnés aux événements, etc.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+    # Fait en sorte que toutes les classes dans le répertoire src/ soient disponibles comme services
+    # Cela crée un service par classe dont l'ID est le nom complet de la classe
     App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
+        resource: '../src/'   # Indique à Symfony où chercher les classes à utiliser comme services (toutes les classes dans le répertoire src/)
+        exclude:              # Cette option permet d'exclure certains répertoires de la configuration des services.
+            - '../src/DependencyInjection/'  # Exclut le répertoire DependencyInjection
+            - '../src/Entity/'               # Exclut le répertoire Entity (il contient des entités de base de données, qui n'ont généralement pas besoin d'être des services)
+            - '../src/Kernel.php'            # Exclut le fichier Kernel, car il ne doit pas être traité comme un service
 
-    # Ajout spécifique pour les commandes
+    # Ajout spécifique pour les commandes Symfony
+    # Les classes dans le répertoire src/Command/ sont traitées comme des services et sont marquées avec le tag 'console.command'.
+    # Cela permet à Symfony de les reconnaître comme des commandes que vous pouvez exécuter via la console.
     App\Command\:
-        resource: '../src/Command'
-        tags: ['console.command']
+        resource: '../src/Command'     # Indique où trouver les classes des commandes
+        tags: ['console.command']      # Marque ces classes avec le tag 'console.command', permettant à Symfony de les enregistrer comme des commandes dans la console Symfony.
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Vous pouvez ajouter d'autres définitions de services quand une configuration explicite est nécessaire
+    # À noter que les dernières définitions de services remplacent toujours les précédentes, donc l'ordre des déclarations est important.

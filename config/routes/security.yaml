@@ -1,3 +1,9 @@
 _security_logout:
+    # Déclare la ressource associée à la route de déconnexion.
+    # Cette ressource fait référence à un service qui va charger la configuration de la route de déconnexion.
+    # La valeur 'security.route_loader.logout' fait référence à un service interne de Symfony qui gère la route de déconnexion.
     resource: security.route_loader.logout
+
+    # Spécifie que cette ressource est un service Symfony et non un fichier de configuration classique (comme .yaml ou .xml).
+    # Cela permet de charger dynamiquement la route de déconnexion via un service spécifique, ici `security.route_loader.logout`.
     type: service

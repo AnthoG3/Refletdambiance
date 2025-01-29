@@ -3,22 +3,50 @@
 {% block metatitle %}Inspirations | Reflet d'ambiance{% endblock %}
 
 {% block body %}
+
     <div class="container mt-4">
+        {# Le conteneur Bootstrap avec une marge en haut de 4 unités (mt-4) pour espacer du contenu au-dessus. #}
+
         <h1 class="mb-4">Nos Inspirations</h1>
+        {# Le titre principal de la page avec une marge en bas de 4 unités (mb-4). #}
+
         <div class="row">
+            {# Début d'une ligne Bootstrap pour contenir plusieurs éléments alignés. #}
+
             {% for inspiration in inspirations %}
+
                 <div class="col-md-4 mb-4">
+                    {# Chaque élément de la boucle est contenu dans une colonne de largeur 4 sur 12 (sur des écrans de taille moyenne ou plus). #}
+
                     <div class="card h-100">
+                        {# La card Bootstrap avec une hauteur de 100% (h-100) pour occuper toute la hauteur disponible dans la colonne. #}
+
                         {% if inspiration.image %}
+                            {# Vérifie si l'inspiration a une image associée. Si oui, elle est affichée. #}
+
                             <img src="{{ asset('uploads/inspirations/' ~ inspiration.image) }}" class="card-img-top" alt="{{ inspiration.title }}" style="height: 200px; object-fit: cover;">
+                            {# L'image est affichée en utilisant le chemin dynamique 'uploads/inspirations/[image]', avec une hauteur de 200px et un 'object-fit' pour garantir que l'image couvre bien l'espace sans déformation. #}
+
                         {% endif %}
+
                         <div class="card-body d-flex flex-column">
+                            {# Le corps de la card utilise Flexbox avec 'd-flex flex-column' pour disposer les éléments verticalement. #}
+
                             <h5 class="card-title">{{ inspiration.title }}</h5>
-                            <a href="{{ path('app_inspiration_show', {'id': inspiration.id}) }}" class="btn btn-primary voir-plus mt-auto">Voir plus</a>
+                            {# Le titre de l'inspiration est affiché dans un élément <h5>. #}
+
+                            <a href="{{ path('app_inspiration_show', {'id': inspiration.id}) }}" class="btn btn-primary voir-plus mt-auto">
+                                Voir plus
+                            </a>
+                            {# Un bouton 'Voir plus' est créé qui redirige l'utilisateur vers la page de détails de l'inspiration en utilisant la route 'app_inspiration_show' et en passant l'ID de l'inspiration. #}
+
                         </div>
                     </div>
                 </div>
             {% endfor %}
+
         </div>
     </div>
+
 {% endblock %}
+{# Fin du bloc 'body', qui contient le contenu principal de la page. #}

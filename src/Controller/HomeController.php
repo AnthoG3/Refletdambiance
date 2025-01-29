@@ -32,7 +32,7 @@ class HomeController extends AbstractController
             $email = (new Email())
                 ->from('contact@refletdambiance.fr')
                 ->to('anthony.gevers@lapiscine.pro')
-                ->subject('Vous avez une nouvelle demande de contact')
+                ->subject('Hey ! Tu as une nouvelle demande de contact')
                 ->html(
                     '<html>
             <head>

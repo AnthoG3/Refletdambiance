@@ -1,7 +1,8 @@
 controllers:
     resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+        path: ../src/Controller/  # Définit le chemin où Symfony va chercher les fichiers de contrôleurs.
+        namespace: App\Controller  # Spécifie l'espace de noms des contrôleurs (ici, 'App\Controller').
+    type: attribute  # Spécifie que les routes et les actions de contrôleur seront définies via des attributs PHP (annotations).
+
 logout:
-    path: /logout # Définit la route de déconnexion
+    path: /logout  # Définit la route de déconnexion. L'URL de cette route sera '/logout'.

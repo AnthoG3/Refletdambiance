@@ -1,3 +1,9 @@
 framework:
     mailer:
+        # Définit la DSN (Data Source Name) pour le service de messagerie.
+        # Le DSN est une chaîne qui contient les informations nécessaires pour se connecter au serveur de messagerie.
+        # Exemple de valeur pour MAILER_DSN dans le fichier .env :
+        # - Pour SMTP : smtp://username:password@smtp.example.com:587
+        # - Pour Sendmail : sendmail://default
+        # - Pour Mailgun : mailgun+https://API_KEY@DOMAIN
         dsn: '%env(MAILER_DSN)%'

@@ -3,31 +3,56 @@
 {% block metatitle %}Connexion Admin | Reflet d'ambiance{% endblock %}
 
 {% block body %}
-    <div class="card admin-login-card">
+    <div class="card admin-login-card"> {# Utilise la classe Bootstrap "card" pour créer une section encadrée pour le formulaire de connexion #}
         <div class="card-body">
             <div class="container">
+                {# Affichage des messages flash (ex. erreurs ou succès), ajoutés depuis le contrôleur #}
                 {% for label, messages in app.flashes %}
                     {% for message in messages %}
                         <div class="alert alert-{{ label == 'error' ? 'danger' : label }} alert-dismissible fade show" role="alert">
-                            {{ message }}
+                            {{ message }} {# Affiche le contenu du message flash #}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            {# Bouton pour fermer le message, compatible avec Bootstrap #}
                         </div>
                     {% endfor %}
                 {% endfor %}
+
                 <div class="row">
                     <h1 class="text-center">Connexion Admin</h1>
-                    <div class="col">
+                    {# Titre de la page centré grâce à la classe Bootstrap "text-center" #}
+
+                    <div class="col"> {# Une colonne pour contenir le formulaire #}
                         <form method="post">
-                            <div class="form-group">
+                            {# Formulaire de connexion avec envoi des données via la méthode POST #}
+
+                            <div class="form-group"> {# Groupe de champs pour l'email #}
                                 <label for="email">Email:</label>
-                                <input type="email" id="email" name="email" class="form-control" value="{{ last_username }}" required autofocus>
+                                {# Étiquette pour le champ email, liée via l'attribut "for" #}
+                                <input type="email" id="email" name="email" class="form-control"
+                                       value="{{ last_username }}" required autofocus>
+                                {# Champ de saisie pour l'email :
+                                   - "value" préremplit le dernier email saisi en cas d'erreur
+                                   - "required" rend le champ obligatoire
+                                   - "autofocus" place automatiquement le curseur dans ce champ au chargement de la page #}
                             </div>
-                            <div class="form-group">
+
+                            <div class="form-group"> {# Groupe de champs pour le mot de passe #}
                                 <label for="password">Mot de passe:</label>
+                                {# Étiquette pour le champ mot de passe, liée via l'attribut "for" #}
                                 <input type="password" id="password" name="password" class="form-control" required>
+                                {# Champ de saisie pour le mot de passe, de type "password" pour masquer les caractères saisis #}
                             </div>
+
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                            <button type="submit" class="btn btn-primary d-block mx-auto mt-3">Se connecter</button>
+                            {# Champ caché pour inclure un jeton CSRF, protégeant le formulaire contre les attaques CSRF(voir explication en bas) #}
+
+                            <button type="submit" class="btn btn-primary d-block mx-auto mt-3">
+                                Se connecter
+                            </button>
+                            {# Bouton pour soumettre le formulaire :
+                               - "btn btn-primary" applique le style Bootstrap
+                               - "d-block mx-auto" centre horizontalement le bouton
+                               - "mt-3" ajoute une marge au-dessus pour espacer le bouton #}
                         </form>
                     </div>
                 </div>
@@ -35,3 +60,24 @@
         </div>
     </div>
 {% endblock %}
+
+{# Une attaque CSRF (Cross-Site Request Forgery, ou falsification de requête intersites)
+ est un type d’attaque web dans lequel un utilisateur authentifié sur un site est trompé
+  pour exécuter des actions non désirées sur ce site, sans qu’il en ait l’intention.
+
+Comment fonctionne une attaque CSRF ?
+Victime authentifiée : L'utilisateur est connecté à un site web (exemple.com) avec ses identifiants.
+Le site utilise des cookies pour gérer l'authentification.
+
+Piège malveillant : L'attaquant incite la victime à visiter un autre site web malveillant ou à cliquer sur un lien.
+ Ce lien peut déclencher une requête HTTP (GET ou POST) vers exemple.com.
+
+Exécution de l’action non désirée :
+
+Lorsque la victime clique sur le lien ou exécute le script malveillant, une requête est envoyée au site exemple.com
+ en utilisant les cookies de session de la victime (qui sont automatiquement inclus dans la requête par le navigateur).
+Comme la victime est déjà connectée, le site exemple.com croit que cette requête est légitime et l'exécute.
+Impact : L'attaquant peut exécuter des actions sur le site en utilisant les privilèges de la victime
+(exemple : changer un mot de passe, effectuer un transfert bancaire, ou supprimer des données).
+
+#}

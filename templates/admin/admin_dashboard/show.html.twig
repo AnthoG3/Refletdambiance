@@ -19,6 +19,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ entity.title }}</h5>
                 <p class="card-text formatted-content">{{ entity.content|raw }}</p>
+                <p class="card-text"><small class="text-muted">Créé le : {{ entity.createdAt|date('d/m/Y') }}</small></p>
             </div>
         </div>
 

@@ -1,6 +1,13 @@
 twig:
+    # Définition du modèle de nommage des fichiers Twig.
+    # Par défaut, Twig chargera uniquement les fichiers dont le nom correspond à ce modèle.
+    # Ici, tous les fichiers avec l'extension ".twig" seront pris en compte.
     file_name_pattern: '*.twig'
 
 when@test:
     twig:
+        # Active le mode strict pour les variables dans l'environnement de test.
+        # Cela signifie que si vous tentez d'accéder à une variable non définie ou non existante dans un fichier Twig,
+        # une exception sera levée. Ce comportement permet de détecter les erreurs dans les templates
+        # avant le déploiement en production.
         strict_variables: true

@@ -1,10 +1,17 @@
 framework:
     router:
-        # Configure how to generate URLs in non-HTTP contexts, such as CLI commands.
-        # See https://symfony.com/doc/current/routing.html#generating-urls-in-commands
-        #default_uri: http://localhost
+    # Définit comment les URL sont générées dans des contextes non-HTTP (par exemple, des commandes CLI).
+    # Cela est utile pour générer des liens valides même lorsqu'il n'y a pas de requête HTTP active.
+    # Exemple : une commande qui envoie un email avec des liens doit savoir quel domaine utiliser.
+    # La clé `default_uri` permet de spécifier l'URL de base à utiliser.
+    #default_uri: http://localhost  # Décommentez et remplacez par l'URL de votre application en local ou en production.
 
 when@prod:
     framework:
         router:
+            # En production, `strict_requirements` peut être défini à `null` pour désactiver les vérifications strictes des paramètres d'URL.
+            # Cela permet d'éviter des exceptions si les paramètres requis sont manquants ou incorrects.
+            # - true : Active les vérifications strictes (exception en cas de problème).
+            # - false : Désactive les vérifications strictes (les URL incorrectes ne sont pas générées).
+            # - null : Comportement flexible, évitant les exceptions tout en journalisant les erreurs.
             strict_requirements: null

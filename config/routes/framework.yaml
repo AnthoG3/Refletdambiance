@@ -1,4 +1,13 @@
 when@dev:
     _errors:
+        # Déclare la ressource de configuration des routes pour la gestion des erreurs.
+        # Ici, `errors.xml` est un fichier de configuration XML situé dans le répertoire de ressources du FrameworkBundle.
+        # Ce fichier contient les règles de routage liées aux erreurs, par exemple, les pages d'erreurs personnalisées
+        # (comme 404, 500, etc.) que Symfony doit gérer.
         resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+
+        # Définit un préfixe pour les routes d'erreurs.
+        # Les routes définies dans `errors.xml` seront précédées de ce préfixe.
+        # Par exemple, une route définie dans `errors.xml` pour une erreur 404 pourrait être accessible via `/404`.
+        # Ce préfixe permet de séparer les routes d'erreur des autres routes normales de l'application.
         prefix: /_error

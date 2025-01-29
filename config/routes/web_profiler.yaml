@@ -1,8 +1,22 @@
 when@dev:
     web_profiler_wdt:
+        # Déclare la ressource associée à la route Web Debug Toolbar (WDT) pour l'environnement de développement.
+        # Ce fichier XML (`wdt.xml`) contient les règles de routage qui permettent d'afficher la barre d'outils de débogage.
+        # La Web Debug Toolbar (WDT) est une barre affichée en bas de la page, qui fournit des informations détaillées sur la requête,
+        # les performances, les logs, etc.
         resource: '@WebProfilerBundle/Resources/config/routing/wdt.xml'
+
+        # Définit un préfixe pour la route de la Web Debug Toolbar.
+        # Cela signifie que la route de la WDT sera accessible via un chemin comme `/_wdt`.
+        # Le préfixe permet d'éviter les conflits avec d'autres routes de l'application.
         prefix: /_wdt
 
     web_profiler_profiler:
+        # Déclare la ressource associée à la route du profiler, qui permet d'accéder à des informations détaillées sur chaque requête.
+        # Le fichier `profiler.xml` contient la configuration des routes qui affichent des profils pour chaque requête HTTP.
+        # Ces profils contiennent des informations telles que les requêtes SQL exécutées, les performances, les événements déclenchés, etc.
         resource: '@WebProfilerBundle/Resources/config/routing/profiler.xml'
+
+        # Définit un préfixe pour la route du profiler.
+        # Cela permet d'accéder à l'interface de profilage des requêtes via un chemin comme `/_profiler`.
         prefix: /_profiler

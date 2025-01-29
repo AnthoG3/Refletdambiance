@@ -1,11 +1,27 @@
-# Enable stateless CSRF protection for forms and logins/logouts
+# Configuration du framework pour activer la protection CSRF sans état.
 framework:
     form:
         csrf_protection:
-            token_id: submit
+            token_id: submit  # Déclare un identifiant de jeton CSRF pour les formulaires (par exemple, "submit").
 
     csrf_protection:
+        # Liste des identifiants de jeton CSRF utilisés dans des contextes sans état.
         stateless_token_ids:
-            - submit
-            - authenticate
-            - logout
+            - submit         # Jeton CSRF pour les soumissions de formulaires.
+            - authenticate   # Jeton CSRF utilisé pour les processus d'authentification.
+            - logout         # Jeton CSRF pour sécuriser les actions de déconnexion.
+
+
+
+   # La protection CSRF est une mesure de sécurité qui empêche des requêtes malveillantes d'être effectuées par des tiers au nom d'un utilisateur légitime.
+   # Ici, le fichier configure cette protection dans un framework (probablement Symfony).
+
+   # Clé form et son sous-élément csrf_protection:
+
+   # Définit un jeton CSRF spécifique pour sécuriser les formulaires.
+   # L'option token_id: submit associe un identifiant à ce jeton.
+
+   # Clé csrf_protection et ses jetons sans état:
+
+   # Les identifiants spécifiés dans stateless_token_ids sont utilisés dans des scénarios où il n'y a pas de session persistante (comme les API REST).
+   # Chaque action critique (comme submit, authenticate ou logout) est protégée par un jeton dédié.
