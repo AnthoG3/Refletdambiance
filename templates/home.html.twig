@@ -71,7 +71,7 @@
 
                             <div class="form-group">
                                 {{ form_label(contactForm.pieces, 'Nombre de pièces :') }}
-                                {{ form_widget(contactForm.pieces, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(contactForm.pieces, {'attr': {'class': 'form-select'}}) }}
                                 {{ form_errors(contactForm.pieces) }}
                             </div>
 
@@ -83,13 +83,13 @@
 
                             <div class="form-group">
                                 {{ form_label(contactForm.habitation, 'Type d\'habitation :') }}
-                                {{ form_widget(contactForm.habitation, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(contactForm.habitation, {'attr': {'class': 'form-select'}}) }}
                                 {{ form_errors(contactForm.habitation) }}
                             </div>
 
                             <div class="form-group">
                                 {{ form_label(contactForm.foyer, 'Vous êtes : ') }}
-                                {{ form_widget(contactForm.foyer, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(contactForm.foyer, {'attr': {'class': 'form-select'}}) }}
                                 {{ form_errors(contactForm.foyer) }}
                             </div>
 

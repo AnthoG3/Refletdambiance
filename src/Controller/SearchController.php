@@ -24,7 +24,11 @@ class SearchController extends AbstractController
         if (empty($query)) {
             return $this->render('search/results.html.twig', [
                 'query' => $query,
-                'results' => [],
+                'results' => [
+                    'formules' => [],
+                    'inspirations' => [],
+                    'realisations' => []
+                ],
             ]);
         }
 
@@ -33,11 +37,11 @@ class SearchController extends AbstractController
         $inspirations = $inspirationRepository->searchByTerm($query);
         $realisations = $realisationRepository->searchByTerm($query);
 
-        // Fusionne tous les résultats
+        // Fusionne tous les résultats et garantit qu'ils sont toujours des tableaux
         $results = [
-            'formules' => $formules,
-            'inspirations' => $inspirations,
-            'realisations' => $realisations,
+            'formules' => $formules ?? [],
+            'inspirations' => $inspirations ?? [],
+            'realisations' => $realisations ?? [],
         ];
 
         return $this->render('search/results.html.twig', [

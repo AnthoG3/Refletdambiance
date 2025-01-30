@@ -19,6 +19,7 @@ class FormuleController extends AbstractController
         return $this->render('formule/index.html.twig', [
             'formules' => $formules,
         ]);
+
     }
 
     // Route pour afficher une formule spécifique
